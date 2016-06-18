@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}My Lists{% endblock %}
+
+{% block content %}
+<body id='newItem'>
+<!-- NavBar-->
+	<nav class="navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/index">AisleMate</a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+
+					<li class="menuItem"><a href="">Profile</a></li>
+					<li class="menuItem"><a href="/myAisleMate">My Lists</a></li>
+					<li class="menuItem"><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+	<div>
+		<div class="modal-dialog">
+			{% with messages = get_flashed_messages() %}
+		      {% if messages %}
+		        <ul>
+		        {% for message in messages %}
+		            <li>{{ message }} </li>
+		        {% endfor %}
+		        </ul>
+		      {% endif %}
+		    {% endwith %}
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Add New Item</h3>
+				</div>
+				<div class="modal-body">
+					<form action="" method="post">
+						{{ new.hidden_tag() }}
+						<p>
+							{{ new.item.label }}
+							{{ new.item(class_="form-control", placeholder="Name of Item", autofocus=true) }}
+							{% for error in new.item.errors %}
+            					<span style="color: red;">[{{ error }}]</span>
+        					{% endfor %}
+						</p>
+						<p>
+							{{ new.aisle.label }}
+							{{ new.aisle(class_="form-control") }}
+							{% for error in new.aisle.errors %}
+            					<span style="color: red;">[{{ error }}]</span>
+        					{% endfor %}
+						</p>
+						<p>{{ new.submitItem(class_="btn") }}</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock %}

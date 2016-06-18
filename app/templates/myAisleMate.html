@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}My Lists{% endblock %}
+
+{% block content %}
+<body id="aislemate">
+	
+	<!-- NavBar-->
+	<nav class="navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">AisleMate</a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+
+					<li class="menuItem"><a href="">Profile</a></li>
+					<li class="menuItem"><a href="/newItem">Add Item</a></li>
+					<li class="menuItem"><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+	<div>
+		<div class="col-md-3 hidden-xs" style="height: 100%">
+		</div>
+		<div id="main-container" class="col-md-6" style="background-color: lightblue;height: 100%">
+			{% if current_user %}
+				<h6 style="text-align: right;"> Signed in as {{ current_user.email }}!</h6>
+			{% else %}
+				<h6 style="text-align: right;"> Hey, guest </h6>
+			{% endif %}
+			
+			<div style='clear:both'></div>
+		<h1>Your shopping list</h1>
+		<br>
+		<select id="gate" onchange="location = this.value;">
+			<option value='/myAisleMate/rb'>Super J - Rodney Bay</option>
+			<option value='/myAisleMate/rh'>Super J - Rodney Heights</option>
+			<option value='/myAisleMate/mj'>Mega J's</option>
+		</select>
+		<div id='core'>
+		{% for number in order %}
+			{% for aisle in aisles %}
+				{% if number == aisle.id %}
+				<div style="text-align: left; padding-left: 10px">
+					<h4>{{ aisle.name }}</h4>
+					<ul>
+						{% for item in items %}
+							{% if item.aisle == aisle %}
+							<li>
+								<span>
+									<input type="checkbox"></input>{{ item.name }} 
+									<a href="" class="glyphicon glyphicon-pencil" style="padding-left: 90%"></a>
+									<a href="/remove/{{item.name}}" type="button" class="close" style="color: black">&times;</a>
+								</span>
+							</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+		<div>
+			<a href="/newItem" role="button" class="btn  btn-lg mybutton_cyano wow fadeIn" data-wow-delay="0.8s" >Add Item</a>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#gate").val('/myAisleMate/{{supermarket}}');
+			});
+		</script>
+		<div style='clear:both'></div>
+		</div>
+		</div>
+		<div class="col-md-3 hidden-xs" style="height: 100%">
+		</div>
+	</div>
+</body>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AisleMate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AisleMate - Your Personal Shopping Assistant">
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- Custom Google Web Font -->
+    <link href="static/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" rel="stylesheet" media="screen">
+    <link href="http://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" media="screen">
+    <!-- Custom CSS -->
+    <link href="static/general.css" rel="stylesheet" media="screen">
+    <!-- Owl Carousel -->
+    <link href="static/custom.css" rel="stylesheet" media="screen">
+    <link href="static/owl.carousel.css" rel="stylesheet" media="screen">
+    <link href="static/owl.theme.css" rel="stylesheet" media="screen">
+    <link href="static/style.css" rel="stylesheet" media="screen">
+    <link href="static/animate.css" rel="stylesheet" media="screen">
+    <!-- Magnific Popup core CSS file -->
+    <link href="static/magnific-popup.css" rel="stylesheet" media="screen">
+    <script src="static/modernizr-2.8.3.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <nav class="navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#home">AisleMate</a>
+                </div>
+            </div>
+        </nav> 
+      </div>
+ 
+      <div class="jumbotron">
+        <h1>Sign Up</h1>
+        <form class="form-signin">
+            <label for="inputName" class="sr-only">Name</label>
+            <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+             
+            <button id="btnSignUp" onclick="signup()" class="btn btn-lg btn-primary btn-block" type="button">Sign Me Up!</button>
+            <script>
+            function signup() {
+                $.ajax({
+                    url: '/signUp',
+                    data: $('form').serialize(),
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            };
+            </script>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
