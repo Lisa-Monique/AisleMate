@@ -17,7 +17,7 @@ def index():
       db.session.add(user)
       db.session.commit()
       login_user(user, remember=True)
-      print current_user.email
+      print(current_user.email)
       return redirect("/myAisleMate/rb")
     else:
       flash("Incorrect email or password")
@@ -40,7 +40,7 @@ def index():
 
 @app.route('/myAisleMate/<supermarket>')
 def home(supermarket):
-  print supermarket
+  print(supermarket)
   current_list = List.query.filter_by(user_id=current_user.id).first()
   items = None
   if current_list is not None:
@@ -72,7 +72,7 @@ def add():
       aisle_id = Aisle.query.filter_by(name=aisle_name).first()
       current_list = List.query.filter_by(user_id=current_user.id).first()
       if current_list is not None:
-        print 'hi'
+        print('hi')
         item = Item(name=name, aisle=aisle_id, owner=current_list)
         db.session.add(item)
         db.session.commit()
@@ -82,7 +82,7 @@ def add():
         item = Item(name=name, aisle=aisle_id, owner=nl)
         db.session.add(item)
         db.session.commit()
-        print 'no'
+        print('no')
         return redirect('/myAisleMate/rb')
   return render_template('newItem.html', new=new)
 
@@ -91,7 +91,7 @@ def remove(item):
   message = None
   current_list = List.query.filter_by(user_id=current_user.id).first()
   i = Item.query.filter_by(name=item, owner=current_list).first()
-  print i.name
+  print(i.name)
   db.session.delete(i)
   db.session.commit()
   return redirect('/myAisleMate/rb')
